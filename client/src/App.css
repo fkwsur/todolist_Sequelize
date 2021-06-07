@@ -1,0 +1,9 @@
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.App {
+  text-align: center;
+}
