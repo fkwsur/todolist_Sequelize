@@ -8,7 +8,8 @@
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "sequelize": "^6.6.2"
   },
   "scripts": {
     "start": "nodemon app.js"

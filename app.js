@@ -1,70 +1,29 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const router = express.Router();
+const Router = require('./routes');
+const model = require('./models')
+const db = require('./models')   // mysql 시퀄라이저 모델
 const pool = require('./database');
 var http = require('http');
 http.createServer(app).listen(8080, () => {
   console.log('server on');
 });
 
+db.sequelize
+.authenticate()
+.then(async () => {
+    console.log('db connect ok');
+    await db.sequelize.sync({force : false});
+})
+.catch(err => {
+    console.log('db' + err);
+});
+
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 
-app.get('/list', async (req, res) => {
-  try{
-    const conn = await pool.getConnection();
-    const sql = 'select * from todolist';
-    const [rows] = await pool.query(sql);
-    res.status(200).send(rows);
-    conn.release();
-  } catch (error){
-    console.log(error);
-  }
-});
+app.use('/', Router.TodoRouter)
 
-app.post('/create', async (req, res) => {
-  try{
-    const {content} = req.body;
-    const conn = await pool.getConnection();
-    const sql = 'insert into todolist (content) values(?)';
-    const data = [content];
-    const [rows] = await pool.query(sql,data);
-    res.status(200).send(rows);
-    conn.release();
-  } catch (error){
-    console.log(error);
-  }
-});
-
-app.post('/update', async (req, res) => {
-  try{
-    const {idx, content} = req.body;
-    console.log(idx,content);
-    const conn = await pool.getConnection();
-    const sql = 'update todolist set content=? where idx=?';
-    const data = [content,idx];
-    const [rows] = await pool.query(sql,data);
-    res.status(200).send(rows);
-    conn.release();
-  } catch (error){
-    console.log(error);
-  }
-});
-
-app.post('/delete', async (req, res) => {
-  try{
-    const {idx} = req.body;
-    console.log(idx);
-    const conn = await pool.getConnection();
-    const sql = 'delete from todolist where idx=?';
-    const data = [idx];
-    const [rows] = await pool.query(sql,data);
-    res.status(200).send(rows);
-    conn.release();
-  } catch (error){
-    console.log(error);
-  }
-});
 
