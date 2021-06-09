@@ -4,7 +4,6 @@ const cors = require('cors');
 const Router = require('./routes');
 const model = require('./models')
 const db = require('./models')   // mysql 시퀄라이저 모델
-const pool = require('./database');
 var http = require('http');
 http.createServer(app).listen(8080, () => {
   console.log('server on');
