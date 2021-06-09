@@ -5,6 +5,7 @@ export const ListManage = (e) => {
 
   const [list, setList] = useState([]);
   const [update, setUpdate] = useState(""); //수정된 값 저장소 
+  const [changeCheck, setChangeCheck] = useState(false);
 
   const List = async (e) => {
     await axios.get('/list')
@@ -21,22 +22,25 @@ export const ListManage = (e) => {
   }, [])
 
   const onChange = (e) => {
+    setChangeCheck(true);
     setUpdate(e.target.value);
   }
 
 
   const onUpdate = async (idx) => {
-    await axios.post('/update', {
-      idx: idx,
-      content: update
-    })
-      .then((res) => {
-        console.log('res');
-        alert('수정이 완료되었습니다.');
-        window.location.reload();
-      }).catch((err) => {
-        console.log(err);
+    if (changeCheck === true) {
+      await axios.post('/update', {
+        idx: idx,
+        content: update
       })
+        .then((res) => {
+          console.log('res');
+          alert('수정이 완료되었습니다.');
+          window.location.reload();
+        }).catch((err) => {
+          console.log(err);
+        })
+    }
   }
 
   const onDelete = async (idx) => {
@@ -45,8 +49,9 @@ export const ListManage = (e) => {
     })
       .then((res) => {
         console.log('res');
-        alert('삭제가 완료되었습니다.');
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }).catch((err) => {
         console.log(err);
       })
@@ -73,21 +78,31 @@ export const ListFormat = (props) => {
   const [updating, isUpdating] = useState(false);
 
   return (
-    <>
-      <p>{props.idx}</p>
+    <div className="list">
       {updating === false ?
         <>
-          <h3>{props.content}</h3>
-          <button onClick={() => isUpdating(true)}>수정하기</button>
-          <button onClick={() => props.onDelete(props.idx)}>삭제하기</button>
+
+          <div className="title">
+            <p>{props.idx}.</p>
+            <h3 onClick={() => isUpdating(true)}>{props.content}</h3>
+          </div>
+          <button className="check" onClick={() => props.onDelete(props.idx)}>
+            <input type="checkbox" id={props.idx} />
+            <label for={props.idx} class="check-box"></label>
+          </button>
         </>
         :
-        <>
-          <textarea type="text" name="update" onChange={props.onChange} required>{props.updateContent}</textarea>
-          <button onClick={() => props.onUpdate(props.idx)}>수정완료</button>
-          <button onClick={() => isUpdating(false)}>취소</button>
-        </>
+        <form onSubmit={() => props.onUpdate(props.idx)}>
+          <div className="title">
+            <p>{props.idx}.</p>
+            <textarea type="text" name="update" onChange={props.onChange} required>{props.updateContent}</textarea>
+          </div>
+          <div className="btn">
+            <button type="submit">O</button>
+            <button onClick={() => isUpdating(false)}>X</button>
+          </div>
+        </form>
       }
-    </>
+    </div>
   )
 }

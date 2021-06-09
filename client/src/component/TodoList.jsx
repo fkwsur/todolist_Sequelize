@@ -23,9 +23,9 @@ export const TodoList = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type="text" value={todo} name="todo" onChange={onChange} required />
-      <button type="submit">추가하기</button>
+    <form className="write" onSubmit={onSubmit}>
+      <input className="todo_input" type="text" value={todo} name="todo" onChange={onChange} required />
+      <button type="submit" className="submit_btn">ENTER</button>
     </form>
   )
 }

@@ -9,7 +9,7 @@
   6. font-family: 'Teko', sans-serif;
   7. font-family: 'Teko', sans-serif;
 */
-@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700|Nanum+Gothic:400,700|Noto+Sans+KR:100,300,400,500,700|Open+Sans|Teko:wght@300;400;500;600;700&|Roboto:100,300,400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700|Nanum+Gothic:400,700|Noto+Sans+KR:100,300,400,500,700|Fredericka+the+Great|Zilla+Slab:300,400|Open+Sans|Teko:wght@300;400;500;600;700&|Roboto:100,300,400,500,700&display=swap');
 
 * {
   margin: 0;
@@ -76,7 +76,7 @@ fieldset {
   border: 0;
 }
 
-legend,
+/* legend,
 label {
   display: block;
   width: 1px;
@@ -86,7 +86,7 @@ label {
   overflow: hidden;
   margin: 0;
   padding: 0;
-}
+} */
 
 input,
 label {
