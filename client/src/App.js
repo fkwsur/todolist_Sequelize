@@ -7,7 +7,7 @@ import {ListManage} from './component/ListManage.jsx'
 const  App = () => {
   return (
     <div className="App">
-      <h2>Todo List</h2>
+      <h2>Todo List-sqg</h2>
       <TodoList />
       <ListManage />
     </div>
