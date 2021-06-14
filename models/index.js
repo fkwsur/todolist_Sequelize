@@ -24,6 +24,7 @@ const sequelize = new Sequelize(MYSQL_DB, MYSQL_DB_USER, MYSQL_DB_PASSWORD,{
   }
 }); 
 
+// 외래키 쓸때 key와value로 구분시켜줄 때, db.sequelize = sequelize; db.Op = Op; db.QueryTypes = QueryTypes; 사용할 때 필요하다. 이 안에 담아뒀다가 꺼내서 사용
 let db = [];
 
 fs
@@ -40,6 +41,7 @@ fs
     db[model.name] = model;
   });
 
+//외래키 있으면 외래키끼리 연결시켜줌
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
