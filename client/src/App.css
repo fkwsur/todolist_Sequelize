@@ -142,7 +142,7 @@ form {
 
 .list .btn {
   margin-left: 20px;
-
+  transition: opacity ease .5;
 }
 
 

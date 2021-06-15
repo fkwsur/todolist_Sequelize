@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const router = express.Router();
 const pool = require('./database');
-var http = require('http');
+const http = require('http');
 http.createServer(app).listen(8080, () => {
   console.log('server on');
 });
