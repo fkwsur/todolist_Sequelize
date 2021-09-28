@@ -10,8 +10,8 @@ export const ListManage = (e) => {
   const List = async (e) => {
     await axios.get('/list')
       .then((res) => {
-        console.log(res.data);
-        setList(res.data);
+        console.log(res.data.result);
+        setList(res.data.result);
       }).catch((err) => {
         console.log(err);
       })
